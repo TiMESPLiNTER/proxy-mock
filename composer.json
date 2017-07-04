@@ -1,0 +1,15 @@
+{
+    "name": "timesplinter/proxy-mock",
+    "license": "MIT",
+    "require": {
+        "phpunit/phpunit-mock-objects": "^4.0.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "timesplinter\\ProxyMock\\": "src/"
+        }
+    }
+}
