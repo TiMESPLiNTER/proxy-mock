@@ -20,7 +20,6 @@ final class ProxyMockFactory implements ProxyMockFactoryInterface
      */
     public function create(string $className): ProxyMockInterface
     {
-
         if (false === isset($this->registry[$className])) {
             $reflector = new \ReflectionClass($className);
 

@@ -7,6 +7,10 @@ class <classDeclaration>
 
     public function getMock(): \PHPUnit_Framework_MockObject_MockObject
     {
+        if (null === $this->mock) {
+            throw new \RuntimeException('There\'s no proxy mock set.');
+        }
+
         return $this->mock;
     }
 
@@ -14,7 +18,11 @@ class <classDeclaration>
     {
         if (false === $mock instanceof <originalClassName>) {
             throw new \InvalidArgumentException(
-                sprintf('Mock must be an instance of %s', '<originalClassName>')
+                sprintf(
+                    'Mock must be an instance of %s and is %s',
+                    '<originalClassName>',
+                    get_class($mock)
+                )
             );
         }
 
