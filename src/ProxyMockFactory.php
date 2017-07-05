@@ -48,8 +48,8 @@ final class ProxyMockFactory implements ProxyMockFactoryInterface
             throw new \RuntimeException(
                 sprintf(
                     'Can not proxy final method %s of class %s',
-                    $method->getName(),
-                    $method->getDeclaringClass()->getName()
+                    $method->name,
+                    $method->class
                 )
             );
         }
@@ -70,7 +70,7 @@ final class ProxyMockFactory implements ProxyMockFactoryInterface
 
         return strtr($methodBody, [
             '<modifier>' => trim($modifier),
-            '<methodName>' => $method->getName(),
+            '<methodName>' => $method->name,
             '<arguments>' => $this->getMethodParameters($method),
             '<argumentsCall>' => '' !== $argumentsCall ? $argumentsCall : null,
             '<returnType>' => $method->hasReturnType() ? ': '.$method->getReturnType() : null
@@ -79,6 +79,7 @@ final class ProxyMockFactory implements ProxyMockFactoryInterface
 
     /**
      * Returns the parameters of a function or method.
+     * From https://github.com/sebastianbergmann/phpunit-mock-objects
      *
      * @param \ReflectionMethod $method
      * @param bool             $forCall
@@ -89,7 +90,7 @@ final class ProxyMockFactory implements ProxyMockFactoryInterface
     {
         $parameters = [];
         foreach ($method->getParameters() as $i => $parameter) {
-            $name = '$' . $parameter->getName();
+            $name = '$' . $parameter->name;
             /* Note: PHP extensions may use empty names for reference arguments
              * or "..." for methods taking a variable number of arguments.
              */
@@ -127,15 +128,15 @@ final class ProxyMockFactory implements ProxyMockFactoryInterface
                             sprintf(
                                 'Cannot mock %s::%s() because a class or ' .
                                 'interface used in the signature is not loaded',
-                                $method->getDeclaringClass()->getName(),
-                                $method->getName()
+                                $method->class,
+                                $method->name
                             ),
                             0,
                             $e
                         );
                     }
                     if ($class !== null) {
-                        $typeDeclaration = $class->getName() . ' ';
+                        $typeDeclaration = $class->name . ' ';
                     }
                 }
                 if (!$parameter->isVariadic()) {
@@ -167,12 +168,12 @@ final class ProxyMockFactory implements ProxyMockFactoryInterface
 
         if ($class->isFinal()) {
             throw new \RuntimeException(
-                sprintf('Class %s is final and can therefor not be proxied', $class->getName())
+                sprintf('Class %s is final and can therefor not be proxied', $class->name)
             );
         } elseif ($class->isInterface()) {
-            $classDeclaration .= ' implements ' . $class->getName() .', '.ProxyMockInterface::class;
+            $classDeclaration .= ' implements ' . $class->name .', ' . ProxyMockInterface::class;
         } else {
-            $classDeclaration .= ' extends ' . $class->getName().' implements '.ProxyMockInterface::class;
+            $classDeclaration .= ' extends ' . $class->name . ' implements ' . ProxyMockInterface::class;
         }
 
         $methodCode = '';
@@ -186,11 +187,11 @@ final class ProxyMockFactory implements ProxyMockFactoryInterface
             $methodCode .= $this->renderMethod($method) . PHP_EOL;
         }
 
-        $classBody = file_get_contents(__DIR__.'/Generator/class.tpl');
+        $classBody = file_get_contents(__DIR__ . '/Generator/class.tpl');
 
         return strtr($classBody, [
             '<classDeclaration>' => $classDeclaration,
-            '<originalClassName>' => $class->getName(),
+            '<originalClassName>' => $class->name,
             '<methods>' => trim($methodCode),
         ]);
     }
