@@ -1,5 +1,8 @@
 ProxyMock
 =========
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/TiMESPLiNTER/proxy-mock/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/TiMESPLiNTER/proxy-mock/?branch=master)
+
 This library helps to create a proxy instance of a class which then can hold a PHPUnit
 mock of it. That way you can manipulate the mock which sits inside the proxy class but
 never have to change the proxy class.

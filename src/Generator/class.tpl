@@ -8,7 +8,7 @@ class <classDeclaration>
     public function getMock(): \PHPUnit_Framework_MockObject_MockObject
     {
         if (null === $this->mock) {
-            throw new \RuntimeException('There\'s no proxy mock set.');
+            throw new \RuntimeException('There\'s no proxy mock set for class <originalClassName>.');
         }
 
         return $this->mock;
