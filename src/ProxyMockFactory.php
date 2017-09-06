@@ -148,7 +148,7 @@ final class ProxyMockFactory implements ProxyMockFactoryInterface
                     }
                 }
             }
-            if ($parameter->isPassedByReference()) {
+            if (false === $forCall && $parameter->isPassedByReference()) {
                 $reference = '&';
             }
             $parameters[] = $nullable . $typeDeclaration . $reference . $name . $default;
