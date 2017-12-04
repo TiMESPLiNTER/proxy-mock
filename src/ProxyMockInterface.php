@@ -2,6 +2,8 @@
 
 namespace timesplinter\ProxyMock;
 
+use PHPUnit\Framework\MockObject\MockObject;
+
 /**
  * Class ProxyMockInterface
  * @package timesplinter\ServiceMock
@@ -10,12 +12,12 @@ interface ProxyMockInterface
 {
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return MockObject
      */
-    public function getMock(): \PHPUnit_Framework_MockObject_MockObject;
+    public function getMock(): MockObject;
 
     /**
-     * @param \PHPUnit_Framework_MockObject_MockObject $mock
+     * @param MockObject $mock
      */
-    public function setMock(\PHPUnit_Framework_MockObject_MockObject $mock);
+    public function setMock(MockObject $mock);
 }
