@@ -1,3 +1,5 @@
+use PHPUnit\Framework\MockObject\MockObject;
+
 class <classDeclaration>
 {
 
@@ -5,7 +7,7 @@ class <classDeclaration>
 
     public function __construct() { }
 
-    public function getMock(): \PHPUnit_Framework_MockObject_MockObject
+    public function getMock(): MockObject
     {
         if (null === $this->mock) {
             throw new \RuntimeException('There\'s no proxy mock set for class <originalClassName>.');
@@ -14,7 +16,7 @@ class <classDeclaration>
         return $this->mock;
     }
 
-    public function setMock(\PHPUnit_Framework_MockObject_MockObject $mock)
+    public function setMock(MockObject $mock)
     {
         if (false === $mock instanceof <originalClassName>) {
             throw new \InvalidArgumentException(
