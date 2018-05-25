@@ -1,4 +1,4 @@
     <modifier> function <methodName>(<arguments>)<returnType>
     {
-        return $this->getMock()-><methodName>(<argumentsCall>);
+        <return>$this->getMock()-><methodName>(<argumentsCall>);
     }
