@@ -73,6 +73,7 @@ final class ProxyMockFactory implements ProxyMockFactoryInterface
             '<methodName>' => $method->name,
             '<arguments>' => $this->getMethodParameters($method),
             '<argumentsCall>' => '' !== $argumentsCall ? $argumentsCall : null,
+            '<return>' => $method->hasReturnType() && 'void' === $method->getReturnType()->getName() ? null : 'return ',
             '<returnType>' => $method->hasReturnType() ? ': '.$method->getReturnType() : null
         ]);
     }
