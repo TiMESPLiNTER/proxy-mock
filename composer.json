@@ -1,6 +1,7 @@
 {
     "name": "timesplinter/proxy-mock",
     "license": "MIT",
+    "abandoned": true,
     "require": {
         "php": "^7.0",
         "phpunit/phpunit": "^6.5|^7.0|^8.0"
